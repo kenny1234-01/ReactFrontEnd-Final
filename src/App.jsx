@@ -1,28 +1,26 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-//import './App.css'
-import Contact from './assets/Contact'
-import Hello from './assets/Hello'
-import Counter from './assets/Counter'
+import { useState } from "react";
+import FilterableProductTable from "./components/FilterableProductTable";
 
-function App() {
-  const helloData = [
-    {name: 'Sarawut', message: 'Hi there'},
-    {name: 'Kenny', message: 'Hello..'}
-  ];
-  return (
-    <>
-      <div>
-        <Counter/>
-        {helloData.map((data, index) => (
-          <Hello key={index} name={data.name} message={data.message}/>
-        ))}
+export default function App() {
+    const products = [
+        { category: "Fruits", price: "$1", stocked: true, name: "Apple" },
+        { category: "Fruits", price: "$1", stocked: true, name: "Dragonfruit" },
+        { category: "Fruits", price: "$2", stocked: false, name: "Passionfruit" },
+        { category: "Vegetables", price: "$2", stocked: true, name: "Spinach" },
+        { category: "Vegetables", price: "$4", stocked: false, name: "Pumpkin" },
+        { category: "Vegetables", price: "$1", stocked: true, name: "Peas" },
+    ];
 
-        <Contact email="Sarawut@gmail.com" phone="0910616692"/>
-      </div>
-    </>
-  )
+    const [filterText, setFilterText] = useState("");
+    const [inStockOnly, setInStockOnly] = useState(false);
+
+    return (
+        <FilterableProductTable
+            products={products}
+            filterData={filterText}
+            filterAction={setFilterText}
+            inStockOnlyData={inStockOnly}
+            inStockOnlyAction={setInStockOnly}
+        />
+    );
 }
-
-export default App
